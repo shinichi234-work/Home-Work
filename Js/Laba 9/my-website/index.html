@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мои проекты</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f9;
+            padding: 50px;
+        }
+        h1 {
+            color: #333;
+        }
+        .button-container {
+            margin-top: 20px;
+        }
+        .button {
+            display: inline-block;
+            margin: 10px;
+            padding: 15px 30px;
+            font-size: 18px;
+            color: #fff;
+            background-color: #007BFF;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        
+        }
+        .tooltip {
+        position: absolute;
+        background-color: #333;
+        color: #fff;
+        padding: 5px 10px;
+        border-radius: 5px;
+        font-size: 14px;
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity 0.3s;
+    }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const buttons = document.querySelectorAll('.button');
+            const tooltip = document.createElement('div');
+            tooltip.className = 'tooltip';
+            document.body.appendChild(tooltip);
+    
+            buttons.forEach(button => {
+                button.addEventListener('mouseover', (e) => {
+                    const message = button.getAttribute('data-tooltip');
+                    tooltip.textContent = message;
+                    tooltip.style.left = e.pageX + 'px';
+                    tooltip.style.top = e.pageY + 20 + 'px'; // немного ниже курсора
+                    tooltip.style.opacity = 1;
+                });
+    
+                button.addEventListener('mouseout', () => {
+                    tooltip.style.opacity = 0;
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>Добро пожаловать на мой сайт</h1>
+    <h2>Старшинов Натан 234</h2>
+    <p>Выберите проект для просмотра:</p>
+    <div class="button-container">
+        <div class="button-container">
+            <a href="project1/index.html" class="button" data-tooltip="НЛО">Перейти к проекту 1</a>
+            <a href="project2/index.html" class="button" data-tooltip="Визуализатор Звука">Перейти к проекту 2</a>
+        </div>
+    </div>
+</body>
+</html>
