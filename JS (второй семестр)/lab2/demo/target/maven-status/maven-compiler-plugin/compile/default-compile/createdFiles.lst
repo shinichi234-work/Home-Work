@@ -1,0 +1,8 @@
+com\example\demo\DemoApplication.class
+com\example\demo\repository\NonFictionBookRepository.class
+com\example\demo\model\FictionBook.class
+com\example\demo\model\NonFictionBook.class
+com\example\demo\controller\BookWebController.class
+com\example\demo\model\BookItem.class
+com\example\demo\repository\FictionBookRepository.class
+com\example\demo\controller\BookRestController.class

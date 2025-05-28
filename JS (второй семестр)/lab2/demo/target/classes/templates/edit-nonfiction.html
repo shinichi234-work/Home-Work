@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Редактировать Не Художественную литературу</title>
+    <link href="/webjars/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="container">
+<h1 class="mt-4">Редактировать Не Художественную литературу</h1>
+<form th:object="${nonFictionBook}" th:action="@{/edit-nonfiction/{id}(id=${nonFictionBook.id})}" method="post">
+    <div class="mb-3">
+        <label class="form-label">Название:</label>
+        <input type="text" th:field="*{title}" class="form-control"/>
+        <div th:if="${#fields.hasErrors('title')}" class="text-danger" th:errors="*{title}"></div>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Автор:</label>
+        <input type="text" th:field="*{author}" class="form-control"/>
+        <div th:if="${#fields.hasErrors('author')}" class="text-danger" th:errors="*{author}"></div>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Тема:</label>
+        <input type="text" th:field="*{subject}" class="form-control"/>
+        <div th:if="${#fields.hasErrors('subject')}" class="text-danger" th:errors="*{subject}"></div>
+    </div>
+    <button type="submit" class="btn btn-primary">Редактировать</button>
+</form>
+<a href="/" class="btn btn-secondary mt-3">Вернуться</a>
+</body>
+</html>

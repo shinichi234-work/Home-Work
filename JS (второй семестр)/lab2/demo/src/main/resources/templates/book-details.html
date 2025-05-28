@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Информация по Книге</title>
+    <link href="/webjars/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="container">
+<h1 class="mt-4">Информация по Книге</h1>
+<div>
+    <p><strong>Название:</strong> <span th:text="${book.title}"></span></p>
+    <p><strong>Автор:</strong> <span th:text="${book.author}"></span></p>
+    <p th:if="${bookType == 'Fiction'}">
+        <strong>Жанр:</strong> <span th:text="${book.genre}"></span>
+    </p>
+    <p th:if="${bookType == 'Non-Fiction'}">
+        <strong>Тема:</strong> <span th:text="${book.subject}"></span>
+    </p>
+    <p><strong>Тип:</strong> <span th:text="${bookType}"></span></p>
+</div>
+<a th:href="@{/}" class="btn btn-secondary mt-3">Вернуться</a>
+</body>
+</html>

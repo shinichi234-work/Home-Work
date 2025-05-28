@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Error</title>
+    <link href="/webjars/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="container">
+<h1 class="mt-4">Ошибка, похоже что-то пошло не так(</h1>
+<p th:text="${error}"></p>
+<a href="/" class="btn btn-secondary">Вернуться</a>
+</body>
+</html>
