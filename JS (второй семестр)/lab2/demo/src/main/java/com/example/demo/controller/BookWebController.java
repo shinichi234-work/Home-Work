@@ -27,6 +27,7 @@ public class BookWebController {
     @Autowired
     private NonFictionBookRepository nonFictionBookRepository;
 
+    // Существующие методы (оставляем без изменений)
     @GetMapping("/")
     public String getAllBooks(Model model) {
         LOGGER.debug("Fetching all books for main page");
@@ -168,5 +169,52 @@ public class BookWebController {
         LOGGER.error("Error: {}", ex.getMessage());
         model.addAttribute("error", ex.getMessage());
         return "error";
+    }
+
+    // Новые методы PATCH
+    @RequestMapping(value = "/patch-fiction/{id}", method = RequestMethod.POST, params = "_method=PATCH")
+    public String patchFictionBook(@PathVariable Long id, @ModelAttribute("fictionBook") FictionBook fictionBook, BindingResult result) {
+        LOGGER.debug("Patching fiction book with id: {}", id);
+        if (result.hasErrors()) {
+            LOGGER.warn("Validation errors for fiction book id: {}", id);
+            return "edit-fiction";
+        }
+        FictionBook existing = fictionBookRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Fiction book not found with id: " + id));
+        if (fictionBook.getTitle() != null && !fictionBook.getTitle().isBlank()) {
+            existing.setTitle(fictionBook.getTitle());
+        }
+        if (fictionBook.getAuthor() != null && !fictionBook.getAuthor().isBlank()) {
+            existing.setAuthor(fictionBook.getAuthor());
+        }
+        if (fictionBook.getGenre() != null && !fictionBook.getGenre().isBlank()) {
+            existing.setGenre(fictionBook.getGenre());
+        }
+        fictionBookRepository.save(existing);
+        LOGGER.info("Patched fiction book with id: {}", id);
+        return "redirect:/";
+    }
+
+    @RequestMapping(value = "/patch-nonfiction/{id}", method = RequestMethod.POST, params = "_method=PATCH")
+    public String patchNonFictionBook(@PathVariable Long id, @ModelAttribute("nonFictionBook") NonFictionBook nonFictionBook, BindingResult result) {
+        LOGGER.debug("Patching non-fiction book with id: {}", id);
+        if (result.hasErrors()) {
+            LOGGER.warn("Validation errors for non-fiction book id: {}", id);
+            return "edit-nonfiction";
+        }
+        NonFictionBook existing = nonFictionBookRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Non-fiction book not found with id: " + id));
+        if (nonFictionBook.getTitle() != null && !nonFictionBook.getTitle().isBlank()) {
+            existing.setTitle(nonFictionBook.getTitle());
+        }
+        if (nonFictionBook.getAuthor() != null && !nonFictionBook.getAuthor().isBlank()) {
+            existing.setAuthor(nonFictionBook.getAuthor());
+        }
+        if (nonFictionBook.getSubject() != null && !nonFictionBook.getSubject().isBlank()) {
+            existing.setSubject(nonFictionBook.getSubject());
+        }
+        nonFictionBookRepository.save(existing);
+        LOGGER.info("Patched non-fiction book with id: {}", id);
+        return "redirect:/";
     }
 }
