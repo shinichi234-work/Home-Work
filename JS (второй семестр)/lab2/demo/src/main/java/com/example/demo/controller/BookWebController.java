@@ -27,7 +27,6 @@ public class BookWebController {
     @Autowired
     private NonFictionBookRepository nonFictionBookRepository;
 
-    // Существующие методы (оставляем без изменений)
     @GetMapping("/")
     public String getAllBooks(Model model) {
         LOGGER.debug("Fetching all books for main page");
@@ -171,7 +170,6 @@ public class BookWebController {
         return "error";
     }
 
-    // Новые методы PATCH
     @RequestMapping(value = "/patch-fiction/{id}", method = RequestMethod.POST, params = "_method=PATCH")
     public String patchFictionBook(@PathVariable Long id, @ModelAttribute("fictionBook") FictionBook fictionBook, BindingResult result) {
         LOGGER.debug("Patching fiction book with id: {}", id);
