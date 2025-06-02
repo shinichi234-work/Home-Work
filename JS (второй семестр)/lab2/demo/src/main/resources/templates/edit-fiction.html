@@ -6,7 +6,8 @@
 </head>
 <body class="container">
 <h1 class="mt-4">Редактировать Художественную литературу</h1>
-<form th:object="${fictionBook}" th:action="@{/edit-fiction/{id}(id=${fictionBook.id})}" method="post">
+<form th:object="${fictionBook}" th:action="@{/patch-fiction/{id}(id=${fictionBook.id})}" method="post">
+    <input type="hidden" name="_method" value="PATCH"/>
     <div class="mb-3">
         <label class="form-label">Название:</label>
         <input type="text" th:field="*{title}" class="form-control"/>
